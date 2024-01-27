@@ -19,14 +19,14 @@ function RegisterPage() {
   });
 
   return (
-    <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
-      <Card>
+    <Container className="h-screen flex items-center justify-center">
+      <Card className="w-full max-w-md p-8">
         {signupErrors &&
-          signupErrors.map((err) => (
-            <p className="bg-red-500 text-white p-2 text-center">{err}</p>
+          signupErrors.map((err, index) => (
+            <p key={index} className="bg-red-500 text-white p-2 text-center rounded">{err}</p>
           ))}
 
-        <h3 className="text-2xl font-bold">Register</h3>
+        <h3 className="text-2xl font-bold text-center mb-4">Register</h3>
 
         <form onSubmit={onSubmit}>
           <Label htmlFor="name">Name</Label>
@@ -36,10 +36,9 @@ function RegisterPage() {
               required: true,
             })}
           />
+          {errors.name && <p className="text-red-500">Name is required</p>}
 
-          {errors.name && <p className="text-red-500">name is required</p>}
-
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className="mt-4">Email</Label>
           <Input
             type="email"
             placeholder="Enter your email"
@@ -47,9 +46,9 @@ function RegisterPage() {
               required: true,
             })}
           />
-          {errors.email && <p className="text-red-500">email is required</p>}
+          {errors.email && <p className="text-red-500">Email is required</p>}
 
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password" className="mt-4">Password</Label>
           <Input
             type="password"
             placeholder="Enter your password"
@@ -57,14 +56,12 @@ function RegisterPage() {
               required: true,
             })}
           />
-          {errors.password && (
-            <p className="text-red-500">password is required</p>
-          )}
+          {errors.password && <p className="text-red-500">Password is required</p>}
 
-          <Button>Register</Button>
+          <Button className="w-full mt-4">Register</Button>
 
-          <div className="flex justify-between my-4">
-            <p className="mr-4">Already have an account?</p>
+          <div className="flex justify-between mt-6">
+            <p>Already have an account?</p>
             <Link to="/login" className="font-bold">
               Login
             </Link>

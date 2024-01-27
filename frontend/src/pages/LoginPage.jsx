@@ -19,42 +19,40 @@ function LoginPage() {
   });
 
   return (
-    <Container className="h-[calc(100vh-10rem)] flex justify-center items-center">
-      <Card>
+    <Container className="h-screen flex items-center justify-center">
+      <Card className="w-full max-w-md p-8">
         {loginErrors &&
-          loginErrors.map((err) => (
-            <p className="bg-red-500 text-white p-2 text-center">{err}</p>
+          loginErrors.map((err, index) => (
+            <p key={index} className="bg-red-500 text-white p-2 text-center rounded">{err}</p>
           ))}
 
-        <h1 className="text-4xl font-bold my-2 text-center">Sign in</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">Sign in</h1>
 
         <form onSubmit={onSubmit}>
           <Label htmlFor="email">Email</Label>
           <Input
             type="email"
-            placeholder="Email"
+            placeholder="Enter your email"
             {...register("email", {
-              required: true,
+              required: "Email is required",
             })}
           />
-          {errors.email && <p className="text-red-500">Email is required</p>}
+          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password" className="mt-4">Password</Label>
           <Input
             type="password"
-            placeholder="Password"
+            placeholder="Enter your password"
             {...register("password", {
-              required: true,
+              required: "Password is required",
             })}
           />
-          {errors.password && (
-            <p className="text-red-500">Password is required</p>
-          )}
+          {errors.password && <p className="text-red-500">{errors.password.message}</p>}
 
-          <Button>Sign in</Button>
+          <Button className="w-full mt-4">Sign in</Button>
 
-          <div className="flex justify-between my-4">
-            <p className="mr-4">Don't have an account?</p>
+          <div className="flex justify-between mt-6">
+            <p>Don't have an account?</p>
             <Link to="/register" className="font-bold">
               Register
             </Link>
